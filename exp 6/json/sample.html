@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+
+let student = {
+    name: "John Doe",
+    age: 20,
+    courses: ["Math", "Science", "History"]
+};
+let studentJSON = JSON.stringify(student);
+console.log(studentData);
+output;
+{"name":"John Doe","age":20,"courses":["Math","Science","History"]}
+let jsonString = '{"name":"John Doe","age":20,"courses":["Math","Science","History"]}';
+let studentData = JSON.parse(jsonString);
+console.log(studentData);   
+let student = { 
+    name : "John Doe",
+    age : 20,
+    courses : "CSE"
+
+} ; 
+for(let key in student){
+    console.log(key + ": " + student[key]);
+}
+let numebers = [1, 2, 3, 4, 5];
+for(let value of numebers){
+    console.log(value);
+}
+try {
+    let x = y + 1;
+} catch (error) {
+    console.error("An error occurred: " + error.message);
+}
+</script>
+</body>
+</html>
