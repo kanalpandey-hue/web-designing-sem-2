@@ -3,18 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Result Calculator</title>
-     <link rel="stylesheet" href="index.css">
+    <title>Student Marks Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            display: none;
+        }
+        .result-box p {
+            margin: 5px 0;
+            font-size: 15px;
+            color: #333;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-      <div class="container">
-<h2>Student Result Calculator</h2>
-<label>Enter Number of Subjects</label>
-<input type="number" id="subjects" placeholder="Enter Number of Subjects"><br><br>
-<button onclick="calculateResult()">Calculate Result</button>
-<div id="result"></div>
-</div>
-    <script src="main.jsx"></script>
+
+<div class="calculator-card">
+    <h2>Marks Calculator</h2>
     
+    <div id="error-message" class="error">Please enter valid marks between 0 and 100.</div>
+
+    <div class="input-group">
+        <label for="math">Mathematics:</label>
+        <input type="number" id="math" min="0" max="100" placeholder="Enter marks">
+    </div>
+    <div class="input-group">
+        <label for="science">Science:</label>
+        <input type="number" id="science" min="0" max="100" placeholder="Enter marks">
+    </div>
+    <div class="input-group">
+        <label for="english">English:</label>
+        <input type="number" id="english" min="0" max="100" placeholder="Enter marks">
+    </div>
+    <div class="input-group">
+        <label for="history">History:</label>
+        <input type="number" id="history" min="0" max="100" placeholder="Enter marks">
+    </div>
+
+    <button onclick="calculateMarks()">Calculate</button>
+
+    <div id="result" class="result-box">
+        <p><strong>Total Marks:</strong> <span id="total-res"></span> / 400</p>
+        <p><strong>Average Marks:</strong> <span id="avg-res"></span></p>
+        <p><strong>Grade:</strong> <span id="grade-res"></span></p>
+    </div>
+</div>
+
+<script>
+function calculateMarks() {
+    const math = parseFloat(document.getElementById('math').value);
+    const science = parseFloat(document.getElementById('science').value);
+    const english = parseFloat(document.getElementById('english').value);
+    const history = parseFloat(document.getElementById('history').value);
+    
+    const errorDiv = document.getElementById('error-message');
+    const resultDiv = document.getElementById('result');
+
+    if (isNaN(math) || isNaN(science) || isNaN(english) || isNaN(history) ||
+        math < 0 || math > 100 || science < 0 || science > 100 ||
+        english < 0 || english > 100 || history < 0 || history > 100) {
+        
+        errorDiv.style.display = 'block';
+        resultDiv.style.display = 'none';
+        return;
+    }
+
+    errorDiv.style.display = 'none';
+
+
+    const totalMarks = math + science + english + history;
+    const averageMarks = totalMarks / 4;
+
+    let grade = '';
+    if (averageMarks >= 90) {
+        grade = 'A';
+    } else if (averageMarks >= 80) {
+        grade = 'B';
+    } else if (averageMarks >= 70) {
+        grade = 'C';
+    } else if (averageMarks >= 50) {
+        grade = 'D';
+    } else {
+        grade = 'F (Fail)';
+    }
+
+    document.getElementById('total-res').innerText = totalMarks;
+    document.getElementById('avg-res').innerText = averageMarks.toFixed(2); 
+    document.getElementById('grade-res').innerText = grade;
+    
+    resultDiv.style.display = 'block';
+}
+</script>
+
 </body>
 </html>
+
+    
